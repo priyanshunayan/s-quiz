@@ -1,0 +1,10 @@
+{
+ "request1": {
+  "word" : "Hello",
+  "decription": "Used to Greet People"
+ }, 
+ "request2": {
+  "word" : "Hola",
+  "decription": "Used to Greet People in spanish"
+ }
+}
