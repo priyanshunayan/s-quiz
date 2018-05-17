@@ -2,7 +2,7 @@
 // library use for graphs and user specific stats.
 
 
-
+// when we will begin??
 
 // JSON Extraction using XMLHttpRequest() Technique. Move to fetch API sometime later.
 var requestURL = "https://api.myjson.com/bins/btndq";
