@@ -1,11 +1,7 @@
 // Firbase integration for signup and login functionality.
 // library use for graphs and user specific stats.
-const option1 = document.getElementsByClassName(".option1");
-const option2 = document.getElementsByClassName(".option2");
-const question = document.getElementsByClassName('.question');
-
-
-
+var questions = [];
+var i; var wrongDef;
 
 
 
@@ -17,7 +13,7 @@ var words, wordList;
 
 // JSON Extraction using XMLHttpRequest() Technique. Move to fetch API sometime later.
 //Word Extraction
-const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=5&api_key="+key;
+const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key="+key;
 const wordRequest = new XMLHttpRequest();
 wordRequest.open('GET', wordURL, true);
 
@@ -26,22 +22,47 @@ wordRequest.onload = function() {
 	if (wordRequest.status>=200 && wordRequest.status<400) {
     wordList = JSON.parse(this.response);
 	console.log(wordList);
-	words= wordList[0].word;
-	console.log(words);
+	wordList.forEach(function(arrayItem){
+		questions.push(arrayItem.word);
+	})
+	console.log(questions);
+
+
+	//Definition extraction right
+	words = questions[0];
 	const url = "https://api.wordnik.com/v4/word.json/"+words+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
-	//Definition extractions
 	const requestURL = url;
 	const request = new XMLHttpRequest();
 	request.open('GET',requestURL, true);
-
 	request.send();
 	request.onload = function() {
 	if (request.status>=200 && request.status<400) {
 	var data = JSON.parse(this.response);
 	console.log(data);
-	document.getElementById('option1').innerHTML = data[0].text;
-	document.getElementById('option2').innerHTML = data[1].text;
-	document.getElementById('question').innerHTML = "What is the meaning of "+ words + " ?";
+	correctDef = data[0].text;}}
+	//Definiton Extraction wrong
+	let wordsWrong = questions[1];
+	const wordsWrongurl = "https://api.wordnik.com/v4/word.json/"+wordsWrong+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
+	const wordsWrongrequestURL = wordsWrongurl;
+	const wordsWrongrequest = new XMLHttpRequest();
+	wordsWrongrequest.open('GET',wordsWrongrequestURL, true);
+	wordsWrongrequest.send();
+	wordsWrongrequest.onload = function() {
+	if (wordsWrongrequest.status>=200 && wordsWrongrequest.status<400) {
+	var wordsWrongdata = JSON.parse(this.response);
+	console.log(wordsWrongdata);
+	wrongDef = wordsWrongdata[0].text;
+	console.log(wrongDef);
+	// All quiz codes go here........
+
+
+
+
+
+
+
+
+
 
 } else {
 	console.log("We were halfway down still there was error.")
@@ -56,9 +77,8 @@ request.onerror = function() {
 }
 wordRequest.onerror = function() {
 	console.log("Error Ocurred!")
-}
-
-
+};
+console.log(questions);
 
 
 
