@@ -30,42 +30,8 @@ wordRequest.onload = function() {
 		questions.push(arrayItem.word);
 	})
 }
-
-	//Definition extraction right
-	words = questions[0];
-	const url = "https://api.wordnik.com/v4/word.json/"+words+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
-	const requestURL = url;
-	const request = new XMLHttpRequest();
-	request.open('GET',requestURL, true);
-	request.send();
-	request.onload = function() {
-	if (request.status>=200 && request.status<400) {
-	var data = JSON.parse(this.response);
-	//console.log(data);
-	correctDef = data[0].text;
-}
-	//Definiton Extraction wrong
-	let wordsWrong = questions[5];
-	const wordsWrongurl = "https://api.wordnik.com/v4/word.json/"+wordsWrong+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
-	const wordsWrongrequestURL = wordsWrongurl;
-	const wordsWrongrequest = new XMLHttpRequest();
-	wordsWrongrequest.open('GET',wordsWrongrequestURL, true);
-	wordsWrongrequest.send();
-	wordsWrongrequest.onload = function() {
-	if (wordsWrongrequest.status>=200 && wordsWrongrequest.status<400) {
-	var wordsWrongdata = JSON.parse(this.response);
-	//console.log(wordsWrongdata);
-	wrongDef = wordsWrongdata[0].text;
-	//console.log(wrongDef);
-}
-	//Default appereance of the Quiz Question. 
-	document.getElementById('question').innerHTML = "What is the meaning of the word "+ questions[0] + " ?";
-	document.getElementById('option1').innerHTML = correctDef;
-	document.getElementById('option2').innerHTML = wrongDef;
-
-
 	// store correct Definitions in correctAns array.
-		for(i=1;i<5;i++){
+		for(i=0;i<5;i++){
 		wordsNew = questions[i];
 		let urlNew = "https://api.wordnik.com/v4/word.json/"+wordsNew+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
 		let requestURLNew = urlNew;
@@ -83,7 +49,7 @@ wordRequest.onload = function() {
 	}
 }
 		//Store Wrong Answers in wrongAns Array
-		for(i=6;i<10;i++) {
+		for(i=5;i<10;i++) {
 		let wordsWrongNew = questions[i];
 		let wordsWrongurlNew = "https://api.wordnik.com/v4/word.json/"+wordsWrongNew+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
 		let wordsWrongrequestURLNew = wordsWrongurlNew;
@@ -98,7 +64,7 @@ wordRequest.onload = function() {
 		}
 	}
 }
-}}};
+};
 
 console.log(wrongAns);
 console.log(questions);
