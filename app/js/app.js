@@ -1,11 +1,10 @@
 // Firbase integration for signup and login functionality.
 // library use for graphs and user specific stats.
 var questions = [];
-var i=0; var wrongDef;
 var score = [];
 var correctAns = [];
 var wrongAns = [];
-
+var everythingArray = [];
 
 
 //integration of wordnik api
@@ -16,11 +15,12 @@ var words, wordList;
 
 // JSON Extraction using XMLHttpRequest() Technique. Move to fetch API sometime later.
 
-//Word Extraction
+//Word Extraction and definition extraction using Promises. 
+(function apidata(){
+return new Promise(function (resolve,reject){
 const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key="+key;
 const wordRequest = new XMLHttpRequest();
 wordRequest.open('GET', wordURL, true);
-
 wordRequest.send();
 wordRequest.onload = function() {
 	if (wordRequest.status>=200 && wordRequest.status<400) {
@@ -64,17 +64,14 @@ wordRequest.onload = function() {
 		}
 	}
 }
-};
-
-console.log(wrongAns);
-console.log(questions);
-console.log(correctAns);
-
-//Whooa Now we have three arrays one having the question, another having the correct option and another having the wrong options......
-//Begin the quiz thing here. You have all the necessary Data with you bro.
-
-
-
+everythingArray.push(questions,wrongAns,correctAns);
+resolve(everythingArray);
+}
+}).then(function quizQuestions(){
+	document.getElementById('question').innerHTML = "What does "+ everythingArray[0][0] + " mean?";
+})
+}());
+//Begin the quiz thing here.
 
 
 
