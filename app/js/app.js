@@ -1,5 +1,5 @@
-// Firbase integration for signup and login functionality.
-// library use for graphs and user specific stats.
+//Firbase integration for signup and login functionality.
+//library use for graphs and user specific stats.
 var questions = [];
 var score = [];
 var correctAns = [];
@@ -13,7 +13,7 @@ const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
 var words, wordList;
 
 
-// JSON Extraction using XMLHttpRequest() Technique. Move to fetch API sometime later.
+//JSON Extraction using XMLHttpRequest() Technique. Move to fetch API sometime later.
 
 //Word Extraction and definition extraction using Promises. 
 (function apidata(){
@@ -28,7 +28,7 @@ wordRequest.onload = function() {
 	console.log(wordList);
 	wordList.forEach(function(arrayItem){
 		questions.push(arrayItem.word);
-	})
+	});
 }
 	// store correct Definitions in correctAns array.
 		for(i=0;i<5;i++){
@@ -46,7 +46,7 @@ wordRequest.onload = function() {
 		correctAns.push(correctDefNew);
 
 		}
-	}
+	};
 }
 		//Store Wrong Answers in wrongAns Array
 		for(i=5;i<10;i++) {
@@ -62,16 +62,22 @@ wordRequest.onload = function() {
 		wrongDefNew = wordsWrongdataNew[0].text;
 		wrongAns.push(wrongDefNew);
 		}
-	}
+	};
 }
 everythingArray.push(questions,wrongAns,correctAns);
 resolve(everythingArray);
-}
+};
 }).then(function quizQuestions(){
-	document.getElementById('question').innerHTML = "What does "+ everythingArray[0][0] + " mean?";
-})
+	//Begin the quiz thing here.....
+let options = document.getElementsByClassName('option');
+for(i=0;i<options.length;i++){
+	options[i].addEventListener('click', function(){
+		document.getElementById('option1').innerHTML = correctAns[0];
+		document.getElementById('option2').innerHTML = wrongAns[0];		
+	})
+	}
+});
 }());
-//Begin the quiz thing here.
 
 
 
