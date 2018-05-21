@@ -65,13 +65,18 @@ wordRequest.onload = function() {
 	};
 }
 everythingArray.push(questions,wrongAns,correctAns);
+document.getElementById('question-container').style.display='none';
 resolve(everythingArray);
+
 };
 }).then(function quizQuestions(){
+	document.getElementById('question-container').style.display='block';
+	var loader = document.getElementsByClassName('center-loader');
+	loader[0].style.display='none';
 	//Begin the quiz thing here.....
 let options = document.getElementsByClassName('option');
 for(i=0;i<options.length;i++){
-	options[i].addEventListener('click', function(){
+	options[i].addEventListener("click", function(){
 		document.getElementById('option1').innerHTML = correctAns[0];
 		document.getElementById('option2').innerHTML = wrongAns[0];		
 	})

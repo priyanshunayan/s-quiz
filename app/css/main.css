@@ -140,16 +140,23 @@ button p {
 .question-container {
 	line-height: 1.6;
 	width: 80%;
+	display: none;
 }
-.question, .option1,.option2 {
+ .option1,.option2 {
 	text-align: center;
 	border:1px solid #1c7ed6;
 	border-radius: 10px;
 	padding:10px;
+	
+}
+.question {
+	text-align: center;
+	padding: 10px;
 }
 .or {
 	text-align: center;
 	margin-top: 15px;
+
 	
 }
 .question {
@@ -162,6 +169,29 @@ button p {
 	padding: 10px;
 	font-weight: bold;
 }
+@keyframes rotate {
+ to {
+  transform: rotate(1turn)
+ }
+}
+.loading-anim {
+   width: 35px;
+   height: 35px;
+   display: inline-block;
+   border: 5px solid rgba(189,189,189 ,0.25);
+   border-left-color: rgba(3,155,229 ,1);
+   border-top-color: rgba(3,155,229 ,1);
+   border-radius: 50%;
+   animation: rotate 600ms infinite linear;
+}
+.center-loader{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+
+
 /* FOOTER STYLES */
 
 
