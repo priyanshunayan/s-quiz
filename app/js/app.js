@@ -1,4 +1,5 @@
 //to get the words
+let haveMeaningsLoaded = false;
 const getWords = (wordsArray) => {
 	const promise = new Promise((resolve, reject) => {
 		const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
@@ -35,7 +36,13 @@ const getMeaning = (wordsArray, meaningsArray) => {
 					})
 				.then(meaning => {
 					count++;
+					console.log("message");
 					meaningsArray.push(meaning[0].text);
+					if(count === 10) {
+						haveMeaningsLoaded = true;
+						console.log("have");
+						hideLoader();
+					}
 				})
 				.catch(err => {
 					console.log(err);
@@ -47,37 +54,32 @@ const getMeaning = (wordsArray, meaningsArray) => {
 	console.log("From thre Promise", meaningsArray);
 
 }
-//to display the question and answers
+//to display the loaders
 
-function display(array) {
-	if (array.length != 10) {
-		console.log("I should be logged first");
-		document.addEventListener("DOMContentLoaded", () => {
-			x.style.display = "none";
-		})
+function showLoader() {
+	document.addEventListener("DOMContentLoaded", () => {
+		x.style.display = "none";
+	})
+}
 
-	}
-
-	if (array.length === 10) {
-		console.log("When am i logged");
-			const loader = document.getElementsByClassName('center-loader');
-			loader[0].style.display = "none";
-			const x = document.getElementById('x');
-			x.style.display = "block";
-			console.log("yaya");
-
-	}
-
+function hideLoader() {
+	console.log("O am called");
+		const loader = document.getElementsByClassName('center-loader');
+		loader[0].style.display = "none";
+		const x = document.getElementById('x');
+		x.style.display = "block";
+		console.log("yaya");
+	
 }
 
 async function main() {
 	let wordsArray = [];
 	let meaningsArray = [];
-	display(wordsArray);
+	showLoader();
 	await getWords(wordsArray);
 	console.log(wordsArray);
 	await getMeaning(wordsArray, meaningsArray);
-	display(wordsArray);
+	console.log(haveMeaningsLoaded);
 }
 
 main();
