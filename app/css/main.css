@@ -184,6 +184,9 @@ button p {
 	   align-items: center;
 	   justify-content: center;
    }
+   .display-hidden {
+	   display: none !important;
+   }
 /* FOOTER STYLES */
 
 
