@@ -7,7 +7,13 @@
 	<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script type="text/javascript" src="js/app.js"></script>
-
+	<script>
+	const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key="+key;
+	let urlNew = "https://api.wordnik.com/v4/word.json/"+wordsNew+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
+	let wordsWrongurlNew = "https://api.wordnik.com/v4/word.json/"+wordsWrongNew+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
+//
+	const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
+	</script>
 </head>
 <body>
 <header>

@@ -5,7 +5,7 @@ var i=0; var wrongDef;
 var score = [];
 var correctAns = [];
 var wrongAns = [];
-
+console.log("Hello world");
 
 
 //integration of wordnik api
@@ -13,7 +13,7 @@ var wrongAns = [];
 const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
 var words, wordList;
 
-
+//thiscomment
 // JSON Extraction using XMLHttpRequest() Technique. Move to fetch API sometime later.
 
 //Word Extraction
