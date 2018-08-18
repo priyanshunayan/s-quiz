@@ -5,19 +5,15 @@
 	<title>Welcome to S-Quiz-The Fun Game.</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+	<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+	<script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script type="text/javascript" src="js/app.js"></script>
-	<script>
-	const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key="+key;
-	let urlNew = "https://api.wordnik.com/v4/word.json/"+wordsNew+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
-	let wordsWrongurlNew = "https://api.wordnik.com/v4/word.json/"+wordsWrongNew+"/definitions?limit=200&includeRelated=false&useCanonical=false&includeTags=false&api_key="+key;
-	const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
-	</script>
+<!-- 	//<script type="text/javascript" src="js/app.js"></script> -->
 </head>
 <body>
 <header>
 	<!-- <img src="images/logo.png"> -->
-	<h1>SQUIZ</h1>
+	<h1 class="heading">SQUIZ</h1>
 </header>
 <article class="learn-card">
 	<img src="images/trophy.svg" height="70px" width="70px" alt="progress image"> 
@@ -31,14 +27,14 @@
 	<img src="images/progress.png" height="70px" width="70px" alt="progress image">
 	<h3>View your progress</h3>
 </article>
-<article class="buttons">
-	<!-- Facebook Sign up Button -->
-	<button class="button-facebook"><p>Sign Up with Facebook</p></button>
-	<!-- Phone Number Sign up Button -->
-	<button class="button-phone"><p>Sign Up with Phone Number</p></button>
-</article>
+<div class="login-element">
+ <p class="login">Existing User? <a href="login.html" ><b class="login-link">Login </b></a></p>
+</div>
 <!-- <footer>
 	<p>&copy; Priyanshu Nayan</p>
 </footer> -->
+<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
+<script src="js/firebase.js"></script>
+<script src="js/login.js"></script>
 </body>
 </html>

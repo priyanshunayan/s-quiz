@@ -183,3 +183,14 @@ async function main() {
 }
 
 main();
+
+(firebase.auth().onAuthStateChanged(function(user) {
+	var uid = null;
+	if (user) {
+	  // User is signed in.
+	  uid = user.uid;
+	} else {
+		uid = null;
+		window.location.replace("login.html");
+	}
+  })());
