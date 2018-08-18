@@ -171,8 +171,10 @@ b{
 article#results p#score {
 	text-align: center;
 	font-weight: bold;
-	font-size: 2em;
+	font-size: 1.4em;
 	margin-bottom: 2em;
+	line-height: 1.4;
+	font-weight: normal;
 }
 article#results h2#revisit {
 	text-align: center;
@@ -226,6 +228,11 @@ article#results p#words {
    }
    body .width-80 {
 	   width: 50%;
+   }
+   .center {
+	   display: flex;
+	   justify-content: center;
+	   align-items: center
    }
 /* FOOTER STYLES */
 

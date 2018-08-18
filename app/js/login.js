@@ -31,7 +31,7 @@
         var uid = null;
         if (user) {
             // User is signed in.
-
+            console.log("user ======>", user);
             window.location.replace("quiz.html");
             uid = user.uid;
         } else {

@@ -66,6 +66,8 @@ function showLoader() {
 		const questionStatus = document.getElementById("question-status");
 		x.style.display = "none";
 		questionStatus.style.display = "none";
+		document.getElementById('share').style.display = "none";
+		document.getElementById('playAgain').style.display = "none";
 	})
 }
 
@@ -77,6 +79,8 @@ function hideLoader() {
 	const x = document.getElementById('x');
 	x.style.display = "block";
 	questionStatus.style.display = "table-cell";
+	document.getElementById('share').style.display = "none";
+	document.getElementById('playAgain').style.display = "none";
 	console.log("yaya");
 
 }
@@ -157,18 +161,37 @@ const displayResults = () => {
 		const questionStatus = document.getElementById("question-status");
 		x.style.display = "none";
 		questionStatus.style.display = "none";
-		document.getElementById('score').innerHTML = "Your score: " + score * 50 + "/250";
+		const data = JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"));
+		const name = data[0].displayName;
+		let greetings = {
+			1: "You need to work hard!",
+			2: " that can be improved",
+			3: "Its Good",
+			4: "Its Great",
+			5: "This can't get any better"
+		}
+
+		document.getElementById('score').innerHTML = "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>";
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
 		for (var key in wordMeaning) {
 			if (wordMeaning.hasOwnProperty(key)) {
 				loopCount++;
 				if (loopCount < 6) {
-					document.getElementById('words').innerHTML += "<b>" + key + "</b>" + " :" + wordMeaning[key] + "<br>" + "<br>";
+					document.getElementById('words').innerHTML += "<b>" + key + "</b>" + " : " + wordMeaning[key] + "<br>" + "<br>";
 				}
 			}
 		}
-
+		document.getElementById('share').style.display = "inline";
+		document.getElementById('playAgain').style.display = "inline";
+		const playAgain = document.getElementById('playAgain');
+		const share = document.getElementById('share');
+		playAgain.addEventListener('click', () => {
+			window.location.replace('quiz.html');
+		})
+		share.addEventListener('click', () => {
+			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score*50 + "%20out%20of%20250%20on%20SQUIZ"
+		})
 	}
 }
 
@@ -180,6 +203,7 @@ async function main() {
 	console.log(wordsArray);
 	await getMeaning(wordsArray, meaningsArray);
 	console.log(haveMeaningsLoaded);
+	
 }
 
 main();
@@ -188,6 +212,7 @@ main();
 	var uid = null;
 	if (user) {
 	  // User is signed in.
+	  console.log(user);
 	  uid = user.uid;
 	} else {
 		uid = null;
