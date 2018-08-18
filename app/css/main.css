@@ -162,7 +162,28 @@ button p {
 	padding: 10px;
 	font-weight: bold;
 }
-
+b{
+	font-weight: bolder;
+}
+article#results p#score {
+	text-align: center;
+	font-weight: bold;
+	font-size: 2em;
+	margin-bottom: 2em;
+}
+article#results h2#revisit {
+	text-align: center;
+	margin-top: 1em 0 ;
+	font-weight: bold;
+	font-size: 1.4em;
+	
+}
+article#results p#words {
+	font-weight: normal;
+	font-size: 1.2em;
+	padding: 1em;
+	line-height: 1.5;
+}
 @keyframes rotate {
 	to {
 	 transform: rotate(1turn)
