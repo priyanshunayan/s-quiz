@@ -164,6 +164,7 @@ const displayResults = () => {
 		const data = JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"));
 		const name = data[0].displayName;
 		let greetings = {
+			0: "Oops. How about playing it again?",
 			1: "You need to work hard!",
 			2: " that can be improved",
 			3: "Its Good",
