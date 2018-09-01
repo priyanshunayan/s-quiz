@@ -148,7 +148,7 @@ const showQuestions = (wordsArray, meaningsArray) => {
 let score = 0;
 let rightlyAnsweredArray = [];
 const calcScores = (option, answers) => {
-	
+
 	if (answers.includes(option.textContent)) {
 		console.log('options =====>', option.textContent);
 		console.log("Index of Options", answers.indexOf(option.textContent));
@@ -176,7 +176,7 @@ const displayResults = () => {
 			5: "This can't get any better"
 		}
 
-		document.getElementById('score').innerHTML =  "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" + greetings[score] + "</b>";
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" + greetings[score] + "</b>";
 
 		document.getElementById("myItem1").style.display = "block";
 		var bar1 = new ldBar("#myItem1");
@@ -189,15 +189,15 @@ const displayResults = () => {
 			if (wordMeaning.hasOwnProperty(key)) {
 				loopCount++;
 				if (loopCount < 6) {
-						if(rightlyAnsweredArray.includes(loopCount-1)){
-							console.log("Please make it green", loopCount-1); 
-							//document.getElementById('words').classList.add('green');	
-							document.getElementById('words').innerHTML +="<p style = 'color:#008638; background-color:#e5f9e4; padding:1em'>" +  "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>"+ "<br>"; 
-						} else {
-							//document.getElementById('words').classList.add('red');
-							document.getElementById('words').innerHTML += "<p style = 'color:#b8000f; background-color:#f0b7bc; padding: 1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
-						}
-					
+					if (rightlyAnsweredArray.includes(loopCount - 1)) {
+						console.log("Please make it green", loopCount - 1);
+						//document.getElementById('words').classList.add('green');	
+						document.getElementById('words').innerHTML += "<p style = 'color:#008638; background-color:#e5f9e4; padding:1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
+					} else {
+						//document.getElementById('words').classList.add('red');
+						document.getElementById('words').innerHTML += "<p style = 'color:#b8000f; background-color:#f0b7bc; padding: 1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
+					}
+
 				}
 			}
 		}
@@ -209,7 +209,7 @@ const displayResults = () => {
 			window.location.replace('quiz.html');
 		})
 		share.addEventListener('click', () => {
-			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score * 50 + "%20out%20of%20250%20on%20SQUIZ"
+			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score * 50 + "%20out%20of%20250%20on%20https://squiz.netlify.com"
 		})
 	}
 }
@@ -227,12 +227,12 @@ async function main() {
 
 main();
 //check if this is working or not
-(firebase.auth().onAuthStateChanged(function(user) {
+(firebase.auth().onAuthStateChanged(function (user) {
 	var uid = null;
 	if (user) {
-	  // User is signed in.
-	  console.log("user ==========>", user);
-	  uid = user.uid;
+		// User is signed in.
+		console.log("user ==========>", user);
+		uid = user.uid;
 	} else {
 		uid = null;
 		window.location.replace("login.html");
