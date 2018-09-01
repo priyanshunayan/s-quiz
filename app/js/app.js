@@ -147,6 +147,7 @@ const showQuestions = (wordsArray, meaningsArray) => {
 let score = 0;
 
 const calcScores = (option, answers) => {
+	setStrokeColor(score);
 	if (answers.includes(option.textContent)) {
 		score++;
 		console.log("score ===>", score);
@@ -155,6 +156,7 @@ const calcScores = (option, answers) => {
 }
 
 const displayResults = () => {
+	setStrokeColor(score);
 	console.log(count);
 	if (count === 5) {
 		const x = document.getElementById('x');
@@ -177,7 +179,7 @@ const displayResults = () => {
 		document.getElementById("myItem1").style.display = "block";
 		var bar1 = new ldBar("#myItem1");
 		var bar2 = document.getElementById('myItem1').ldBar;
-		let set = score/5 * 100;
+		let set = score / 5 * 100;
 		bar1.set(set);
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
@@ -214,8 +216,9 @@ async function main() {
 }
 
 main();
+const setStrokeColor = (score) => {
 
-
+}
 (firebase.auth().onAuthStateChanged(function (user) {
 	var uid = null;
 	if (user) {

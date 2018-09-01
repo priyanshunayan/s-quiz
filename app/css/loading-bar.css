@@ -2,7 +2,10 @@
     position: relative;
 
 }
-
+.ldBar-label {
+    font-size: 1.2em;
+    font-weight: bolder;
+}
 .ldBar.label-center>.ldBar-label {
     position: absolute;
     top: 50%;
