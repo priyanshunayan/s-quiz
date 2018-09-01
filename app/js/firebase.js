@@ -14,4 +14,27 @@ let app_firebase = {};
   firebase.initializeApp(config);
   app_firebase = firebase;
 
+  const preObject = document.getElementById('object');
+  const ulList = document.getElementById('list');
+  //create references
+
+  const dbRefObject = firebase.database().ref().child('object');
+  const dbRefList = dbRefObject.child('hobbie');
+  //sync Object Changes
+
+  dbRefObject.on('value', snap => {
+    preObject.innerText = JSON.stringify(snap.val(), null, 3);
+  })
+  dbRefList.on('child_added', snap => {
+    console.log(snap.val());
+  })
+  //To Write Data on Database
+  function writeUserData(userId, name, email) {
+    firebase.database().ref('users/' + userId).set({
+      username: name,
+      email: email
+    });
+  }
+  writeUserData("4567890", "Priyanshu", "hey@bay.com");
+
 }())
