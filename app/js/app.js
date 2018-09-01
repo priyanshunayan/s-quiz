@@ -148,6 +148,7 @@ const showQuestions = (wordsArray, meaningsArray) => {
 let score = 0;
 let rightlyAnsweredArray = [];
 const calcScores = (option, answers) => {
+	setStrokeColor(score);
 	if (answers.includes(option.textContent)) {
 		console.log('options =====>', option.textContent);
 		console.log("Index of Options", answers.indexOf(option.textContent));
@@ -158,6 +159,7 @@ const calcScores = (option, answers) => {
 }
 
 const displayResults = () => {
+	setStrokeColor(score);
 	console.log(count);
 	if (count === 5) {
 		const x = document.getElementById('x');
@@ -175,7 +177,17 @@ const displayResults = () => {
 			5: "This can't get any better"
 		}
 
+<<<<<<< HEAD
 		document.getElementById('score').innerHTML =  "<p>" + "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>" + "</p>";
+=======
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" + greetings[score] + "</b>";
+
+		document.getElementById("myItem1").style.display = "block";
+		var bar1 = new ldBar("#myItem1");
+		var bar2 = document.getElementById('myItem1').ldBar;
+		let set = score / 5 * 100;
+		bar1.set(set);
+>>>>>>> score-fancy
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
 		for (var key in wordMeaning) {
@@ -202,7 +214,7 @@ const displayResults = () => {
 			window.location.replace('quiz.html');
 		})
 		share.addEventListener('click', () => {
-			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score*50 + "%20out%20of%20250%20on%20SQUIZ"
+			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score * 50 + "%20out%20of%20250%20on%20SQUIZ"
 		})
 	}
 }
@@ -215,10 +227,11 @@ async function main() {
 	console.log(wordsArray);
 	await getMeaning(wordsArray, meaningsArray);
 	console.log(haveMeaningsLoaded);
-	
+
 }
 
 main();
+<<<<<<< HEAD
 //check if this is working or not
 (firebase.auth().onAuthStateChanged(function(user) {
 	var uid = null;
@@ -226,8 +239,19 @@ main();
 	  // User is signed in.
 	  console.log("user ==========>", user);
 	  uid = user.uid;
+=======
+const setStrokeColor = (score) => {
+
+}
+(firebase.auth().onAuthStateChanged(function (user) {
+	var uid = null;
+	if (user) {
+		// User is signed in.
+		console.log(user);
+		uid = user.uid;
+>>>>>>> score-fancy
 	} else {
 		uid = null;
 		window.location.replace("login.html");
 	}
-  })());
+})());
