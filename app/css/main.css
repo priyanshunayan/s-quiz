@@ -234,6 +234,12 @@ article#results p#words {
 	   justify-content: center;
 	   align-items: center
    }
+   .green {
+	   color: green;
+   }
+   .red {
+	   color: red;
+   }
 /* FOOTER STYLES */
 
 

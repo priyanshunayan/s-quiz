@@ -144,12 +144,15 @@ const showQuestions = (wordsArray, meaningsArray) => {
 		displayResults();
 	})
 }
-let score = 0;
 
+let score = 0;
+let rightlyAnsweredArray = [];
 const calcScores = (option, answers) => {
 	if (answers.includes(option.textContent)) {
+		console.log('options =====>', option.textContent);
+		console.log("Index of Options", answers.indexOf(option.textContent));
+		rightlyAnsweredArray.push(answers.indexOf(option.textContent));
 		score++;
-		console.log("score ===>", score);
 	}
 	console.log("Hi");
 }
@@ -172,14 +175,22 @@ const displayResults = () => {
 			5: "This can't get any better"
 		}
 
-		document.getElementById('score').innerHTML = "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>";
+		document.getElementById('score').innerHTML =  "<p>" + "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>" + "</p>";
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
 		for (var key in wordMeaning) {
 			if (wordMeaning.hasOwnProperty(key)) {
 				loopCount++;
 				if (loopCount < 6) {
-					document.getElementById('words').innerHTML += "<b>" + key + "</b>" + " : " + wordMeaning[key] + "<br>" + "<br>";
+						if(rightlyAnsweredArray.includes(loopCount-1)){
+							console.log("Please make it green", loopCount-1); 
+							//document.getElementById('words').classList.add('green');	
+							document.getElementById('words').innerHTML +="<p style = 'color:#008638; background-color:#e5f9e4; padding:1em'>" +  "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>"+ "<br>"; 
+						} else {
+							//document.getElementById('words').classList.add('red');
+							document.getElementById('words').innerHTML += "<p style = 'color:#b8000f; background-color:#f0b7bc; padding: 1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
+						}
+					
 				}
 			}
 		}
@@ -208,12 +219,12 @@ async function main() {
 }
 
 main();
-
+//check if this is working or not
 (firebase.auth().onAuthStateChanged(function(user) {
 	var uid = null;
 	if (user) {
 	  // User is signed in.
-	  console.log(user);
+	  console.log("user ==========>", user);
 	  uid = user.uid;
 	} else {
 		uid = null;
