@@ -264,6 +264,26 @@ article#results p#words {
    body .width-80 {
 	   width: 50%;
    }
+   .login-element {
+	   margin-top: 2em;
+	   text-align: center;
+   }
+   #loginBtn {
+	   margin-top: 1em;
+	   text-align: center;
+	   background-color: #1c7ed6;
+	   font-family: 'Cookie', cursive;
+	   color: white;
+	   font-size: 2.5em;
+	   letter-spacing: 1px;
+	   padding: 0.5em;
+	   border-radius: 0;
+	   border-top-left-radius: 4px;
+	   border-top-right-radius: 4px;
+	   width: 80%;
+
+   }
+
    .center {
 	   display: flex;
 	   justify-content: center;
@@ -272,6 +292,29 @@ article#results p#words {
    #myItem1 {
 	   display: none;
    }
+   .red {
+	   color:#fa5252;
+   }
 /* FOOTER STYLES */
+   footer {
+	   width: 90%;
+	   margin: auto;
+	   line-height: 1.4;
+	   color:#495057;
+	   font-size: 1.2em;
+	   margin-top: 1.5em;
+	   text-align: center;
+	   margin-bottom: 0.5em;
+	   
+   }
+   footer p {
+	   text-align: center;
+   }
 
+   .name-link {
+	   text-decoration: none;
+	   font-family: "Cookie", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	   color:#495057;
+	   font-size: 1.3em;
+   }
 
