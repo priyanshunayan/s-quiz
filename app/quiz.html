@@ -7,7 +7,9 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+		crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="css/loading-bar.css"/>
+        <script type="text/javascript" src="js/loading-bar.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
@@ -33,6 +35,15 @@
 </article>
 </div>
 <article id="results">
+		<div id="myItem1"
+        class="ldBar label-center"
+        style="width:150px;height:150px;margin:auto"
+        data-type="stroke"
+        data-stroke="green"
+        data-stroke-trail ="gray"
+        data-stroke-trail-width="2"
+        data-preset="circle"
+      ></div>
 	<p id="score"></p>
 	<h2 id="revisit"></h2>
 	<p id="words"></p>

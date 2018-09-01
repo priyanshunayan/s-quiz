@@ -234,6 +234,9 @@ article#results p#words {
 	   justify-content: center;
 	   align-items: center
    }
+   #myItem1 {
+	   display: none;
+   }
 /* FOOTER STYLES */
 
 

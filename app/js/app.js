@@ -172,7 +172,13 @@ const displayResults = () => {
 			5: "This can't get any better"
 		}
 
-		document.getElementById('score').innerHTML = "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>";
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" + greetings[score] + "</b>";
+
+		document.getElementById("myItem1").style.display = "block";
+		var bar1 = new ldBar("#myItem1");
+		var bar2 = document.getElementById('myItem1').ldBar;
+		let set = score/5 * 100;
+		bar1.set(set);
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
 		for (var key in wordMeaning) {
@@ -191,7 +197,7 @@ const displayResults = () => {
 			window.location.replace('quiz.html');
 		})
 		share.addEventListener('click', () => {
-			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score*50 + "%20out%20of%20250%20on%20SQUIZ"
+			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score * 50 + "%20out%20of%20250%20on%20SQUIZ"
 		})
 	}
 }
@@ -204,19 +210,20 @@ async function main() {
 	console.log(wordsArray);
 	await getMeaning(wordsArray, meaningsArray);
 	console.log(haveMeaningsLoaded);
-	
+
 }
 
 main();
 
-(firebase.auth().onAuthStateChanged(function(user) {
+
+(firebase.auth().onAuthStateChanged(function (user) {
 	var uid = null;
 	if (user) {
-	  // User is signed in.
-	  console.log(user);
-	  uid = user.uid;
+		// User is signed in.
+		console.log(user);
+		uid = user.uid;
 	} else {
 		uid = null;
 		window.location.replace("login.html");
 	}
-  })());
+})());
