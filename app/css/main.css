@@ -341,8 +341,9 @@ article#results p#words {
 	   width: 60%;
 	   padding: 0.5em;
 	   color: white;
-	   
-	   margin-bottom: 16px;
+   }
+   #stats p {
+	   margin-bottom: 0;
    }
    #stats a {
 	   color: white;
