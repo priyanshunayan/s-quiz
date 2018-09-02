@@ -168,15 +168,15 @@ const displayResults = () => {
 		const data = JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"));
 		const name = data[0].displayName;
 		let greetings = {
-			0: "Oops. How about playing it again?",
-			1: "You need to work hard!",
-			2: " that can be improved",
-			3: "Its Good",
-			4: "Its Great",
-			5: "This can't get any better"
+			0: ["Oops. How about playing it again?", "Practice is the word", "You know you are better than this", "It happens"],
+			1: ["You need to work hard!", "A liitle practice and you are good to go", "Improve your memory by doing unforgettable things.", "Everything always ends well. If not – it's probably not the end."],
+			2: [" that can be improved", "If you're going through Hell, keep going.", "The road to success is always under construction.", "Anyone who has never made a mistake has never tried anything new."],
+			3: ["Its Good", "The possibilities are endless, but I just want the good ones.", "Keep Learning, Keep moving", "Maintain your learining spirit" ],
+			4: ["Its Great", "There is no dance without the dancers", "Almost close to perfection", "You are certainly good at this :)" ],
+			5: ["This can't get any better", "PERFECT", "BRILLIANT", "BESTEST :)"]
 		}
 
-		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" + greetings[score] + "</b>";
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>"  + "<p>" + greetings[score][Math.floor(Math.random()*3+1)] + "</p>";
 
 		document.getElementById("myItem1").style.display = "block";
 		var bar1 = new ldBar("#myItem1");

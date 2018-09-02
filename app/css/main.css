@@ -283,7 +283,16 @@ article#results p#words {
 	   width: 80%;
 
    }
-
+  #score p {
+	  margin: auto;
+	  font-family: "Cookie", cursive;
+	  margin-top: 0.5em;
+	  width: 90%;
+	  padding: 1em;
+	  text-align: center;
+	  font-size: 1.4em;
+	  color: #1c7ed6;
+	  }
    .center {
 	   display: flex;
 	   justify-content: center;
