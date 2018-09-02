@@ -173,7 +173,7 @@ const displayResults = () => {
 			2: [" that can be improved", "If you're going through Hell, keep going.", "The road to success is always under construction.", "Anyone who has never made a mistake has never tried anything new."],
 			3: ["Its Good", "The possibilities are endless, but I just want the good ones.", "Keep Learning, Keep moving", "Maintain your learining spirit" ],
 			4: ["Its Great", "There is no dance without the dancers", "Almost close to perfection", "You are certainly good at this :)" ],
-			5: ["This can't get any better", "PERFECT", "BRILLIANT", "BESTEST :)"]
+			5: ["This can't get any better", "Perfect", "Brilliant", "Bestest :)"]
 		}
 
 		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>"  + "<p>" + greetings[score][Math.floor(Math.random()*3+1)] + "</p>";
