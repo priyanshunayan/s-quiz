@@ -55,7 +55,6 @@ function chartRender() {
         animationEnabled: true,
         theme: "light1",
         axisX:{
-            minimum:1,
             labelFontColor: "#4dabf7",
             tickLength: 0
         },
