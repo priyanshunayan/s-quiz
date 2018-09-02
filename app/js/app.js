@@ -171,12 +171,12 @@ const displayResults = () => {
 			0: ["Oops. How about playing it again?", "Practice is the word", "You know you are better than this", "It happens"],
 			1: ["You need to work hard!", "A liitle practice and you are good to go", "Improve your memory by doing unforgettable things.", "Everything always ends well. If not – it's probably not the end."],
 			2: [" that can be improved", "If you're going through Hell, keep going.", "The road to success is always under construction.", "Anyone who has never made a mistake has never tried anything new."],
-			3: ["Its Good", "The possibilities are endless, but I just want the good ones.", "Keep Learning, Keep moving", "Maintain your learining spirit" ],
-			4: ["Its Great", "There is no dance without the dancers", "Almost close to perfection", "You are certainly good at this :)" ],
+			3: ["Its Good", "The possibilities are endless, but I just want the good ones.", "Keep Learning, Keep moving", "Maintain your learining spirit"],
+			4: ["Its Great", "There is no dance without the dancers", "Almost close to perfection", "You are certainly good at this :)"],
 			5: ["This can't get any better", "Perfect", "Brilliant", "Bestest :)"]
 		}
 
-		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>"  + "<p>" + greetings[score][Math.floor(Math.random()*3+1)] + "</p>";
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "<p>" + greetings[score][Math.floor(Math.random() * 3 + 1)] + "</p>";
 
 		document.getElementById("myItem1").style.display = "block";
 		var bar1 = new ldBar("#myItem1");
@@ -194,7 +194,7 @@ const displayResults = () => {
 						document.getElementById('words').innerHTML += "<p style = 'color:#008638; background-color:#e5f9e4; padding:1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
 
 					} else {
-						WronglyAnsweredWords.push ({
+						WronglyAnsweredWords.push({
 							word: key,
 							meaning: wordMeaning[key]
 						})
@@ -207,24 +207,25 @@ const displayResults = () => {
 
 		firebase.auth().onAuthStateChanged(function (user) {
 			console.log("user =======>", user);
-		
+
 			if (user) {
 				// User is signed in
 				//writeUserData(user.uid, score);
-				let uid = user.uid; 
+				let uid = user.uid;
 				var hashKey = firebase.database().ref().child('users').push().key;
 				let updates = {};
-				updates['/' +user.uid +'/score/' + hashKey] = score;
+				updates['/' + user.uid + '/score/' + hashKey] = score;
 				WronglyAnsweredWords.forEach(word => {
 					var hashKey = firebase.database().ref().child('users').push().key;
-					updates['/' +user.uid +'/word/' + hashKey] = {
-							word: word.word,
-							def: word.meaning
+					updates['/' + user.uid + '/word/' + hashKey] = {
+						word: word.word,
+						def: word.meaning
 					}
 				});
+
 				return firebase.database().ref().update(updates);
 				/* console.log(user); */
-				
+
 			} else {
 				uid = null;
 				window.location.replace("index.html");
@@ -254,7 +255,10 @@ async function main() {
 
 }
 
+
 main();
+
+
 //check if this is working or not
 firebase.auth().onAuthStateChanged(function (user) {
 	var uid = null;
