@@ -185,31 +185,26 @@ const displayResults = () => {
 		bar1.set(set);
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
+		const WronglyAnsweredWords = [];
 		for (var key in wordMeaning) {
 			if (wordMeaning.hasOwnProperty(key)) {
 				loopCount++;
 				if (loopCount < 6) {
 					if (rightlyAnsweredArray.includes(loopCount - 1)) {
-						console.log("Please make it green", loopCount - 1);
-						//document.getElementById('words').classList.add('green');	
 						document.getElementById('words').innerHTML += "<p style = 'color:#008638; background-color:#e5f9e4; padding:1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
+
 					} else {
-						//document.getElementById('words').classList.add('red');
+						WronglyAnsweredWords.push ({
+							word: key,
+							meaning: wordMeaning[key]
+						})
 						document.getElementById('words').innerHTML += "<p style = 'color:#b8000f; background-color:#f0b7bc; padding: 1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
 					}
 
 				}
 			}
 		}
-/* 
-		function writeUserData(userId, score) {
-			console.log("FInal Score", score);
-		
-			firebase.database().ref('users/' + userId).set({
-				username: name,
-				score: score
-			});
-		} */
+
 		firebase.auth().onAuthStateChanged(function (user) {
 			console.log("user =======>", user);
 		
@@ -220,6 +215,13 @@ const displayResults = () => {
 				var hashKey = firebase.database().ref().child('users').push().key;
 				let updates = {};
 				updates['/' +user.uid +'/score/' + hashKey] = score;
+				WronglyAnsweredWords.forEach(word => {
+					var hashKey = firebase.database().ref().child('users').push().key;
+					updates['/' +user.uid +'/word/' + hashKey] = {
+							word: word.word,
+							def: word.meaning
+					}
+				});
 				return firebase.database().ref().update(updates);
 				/* console.log(user); */
 				
