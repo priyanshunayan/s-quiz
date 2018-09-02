@@ -14,7 +14,7 @@ let app_firebase = {};
   firebase.initializeApp(config);
   app_firebase = firebase;
 
-  const preObject = document.getElementById('object');
+/*   const preObject = document.getElementById('object');
   const ulList = document.getElementById('list');
   //create references
 
@@ -27,14 +27,15 @@ let app_firebase = {};
   })
   dbRefList.on('child_added', snap => {
     console.log(snap.val());
-  })
+  }) */
   //To Write Data on Database
-  function writeUserData(userId, name, email) {
+/*   function writeUserData(userId, name, score) {
     firebase.database().ref('users/' + userId).set({
       username: name,
-      email: email
+      score: score
     });
   }
-  writeUserData("4567890", "Priyanshu", "hey@bay.com");
+  writeUserData("4567890", "Priyanshu", [3,4,5,6,7]);
+  writeUserData("q34567890", "Suprabhat", [ 4, 5,6,7]); */
 
 }())

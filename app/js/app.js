@@ -172,7 +172,7 @@ const displayResults = () => {
 			5: "This can't get any better"
 		}
 
-		document.getElementById('score').innerHTML = "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>";
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" + greetings[score] + "</b>";
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
 		for (var key in wordMeaning) {
@@ -183,6 +183,33 @@ const displayResults = () => {
 				}
 			}
 		}
+/* 
+		function writeUserData(userId, score) {
+			console.log("FInal Score", score);
+		
+			firebase.database().ref('users/' + userId).set({
+				username: name,
+				score: score
+			});
+		} */
+		firebase.auth().onAuthStateChanged(function (user) {
+			console.log("user =======>", user);
+		
+			if (user) {
+				// User is signed in
+				//writeUserData(user.uid, score);
+				let uid = user.uid; 
+				var hashKey = firebase.database().ref().child('users').push().key;
+				let updates = {};
+				updates['/' +user.uid +'/score/' + hashKey] = score;
+				return firebase.database().ref().update(updates);
+				/* console.log(user); */
+				
+			} else {
+				uid = null;
+				window.location.replace("index.html");
+			}
+		});
 		document.getElementById('share').style.display = "inline";
 		document.getElementById('playAgain').style.display = "inline";
 		const playAgain = document.getElementById('playAgain');
@@ -191,7 +218,7 @@ const displayResults = () => {
 			window.location.replace('quiz.html');
 		})
 		share.addEventListener('click', () => {
-			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score*50 + "%20out%20of%20250%20on%20SQUIZ"
+			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score * 50 + "%20out%20of%20250%20on%20SQUIZ"
 		})
 	}
 }
@@ -204,19 +231,21 @@ async function main() {
 	console.log(wordsArray);
 	await getMeaning(wordsArray, meaningsArray);
 	console.log(haveMeaningsLoaded);
-	
+
 }
 
 main();
+console.log("Before Firing up the onAuthStateChange");
 
-(firebase.auth().onAuthStateChanged(function(user) {
+firebase.auth().onAuthStateChanged(function (user) {
 	var uid = null;
 	if (user) {
-	  // User is signed in.
-	  console.log(user);
-	  uid = user.uid;
+		// User is signed in.
+		console.log(user);
+		uid = user.uid;
 	} else {
 		uid = null;
 		window.location.replace("login.html");
 	}
-  })());
+});
+console.log("after the ONAUthState Change");
