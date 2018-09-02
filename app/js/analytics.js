@@ -15,12 +15,12 @@ function readData() {
             uid = user.uid;
             const ref = database.ref(uid);
             ref.on('value', gotData, errData);
-
             function gotData(data) {
+                console.log("inside got data");
                 const scores = data.val();
                 scoreScored = Object.values(scores.score);
                 words = Object.keys(scores.word);
-                for (i = 0; i < words.length; i++) {
+                for (i = words.length-1; i >=0; i--) {
                     let wordObject = scores.word[words[i]];
                     wordObjects.push(wordObject);
                 }
@@ -29,6 +29,10 @@ function readData() {
                         y: scoreScored[i] * 50
                     })
                 }
+                document.getElementById('loader-rotate').style.display = 'none';
+                document.getElementById('loader-rotate-2').style.display = 'none';
+                document.getElementById('playAgainBtn').style.display = 'inline';
+                document.getElementById('logOut').style.display = 'inline';
                 chartRender();
                 displayWords();
             }
@@ -45,22 +49,28 @@ function readData() {
 }
 
 readData();
-console.log(scoreObject);
 
 function chartRender() {
     var chart = new CanvasJS.Chart("chartContainer", {
         animationEnabled: true,
-        theme: "light2",
-        title: {
-            text: "Simple Line Chart"
+        theme: "light1",
+        axisX:{
+            minimum:1,
+            labelFontColor: "#4dabf7",
+            tickLength: 0
         },
         axisY: {
-            includeZero: false
+            includeZero: false,
+            tickLength: 0,
+            includeZero: false,
+            gridColor: "#ced4da",
+            labelFontColor: "#4dabf7"
         },
         data: [{
             lineColor: "#1c7ed6",
             markerColor: "#1c7ed6",
-            lineThickness: 5,
+            markerSize: 3,
+            lineThickness: 2,
             type: "line",
             dataPoints: scoreObject
         }]
@@ -71,7 +81,16 @@ function chartRender() {
 function displayWords() {
     console.log("called");
     wordObjects.forEach(word => {
-        console.log("inside");
         document.getElementById('data').innerHTML += "<p>" + word.word + " :" + word.def + "</p>";
     })
 }
+const logout = document.getElementById("logOut");
+logout.addEventListener("click", () => {
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        window.location.replace('index.html');
+      }, function(error) {
+        // An error happened.
+        console.log("Error", error);
+      });
+})

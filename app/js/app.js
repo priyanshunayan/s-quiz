@@ -68,6 +68,7 @@ function showLoader() {
 		questionStatus.style.display = "none";
 		document.getElementById('share').style.display = "none";
 		document.getElementById('playAgain').style.display = "none";
+		document.getElementById('stats').style.display = "none";
 	})
 }
 
@@ -81,6 +82,7 @@ function hideLoader() {
 	questionStatus.style.display = "table-cell";
 	document.getElementById('share').style.display = "none";
 	document.getElementById('playAgain').style.display = "none";
+	document.getElementById('stats').style.display = "none";
 	console.log("yaya");
 
 }
@@ -233,6 +235,7 @@ const displayResults = () => {
 		});
 		document.getElementById('share').style.display = "inline";
 		document.getElementById('playAgain').style.display = "inline";
+		document.getElementById('stats').style.display = "inline";
 		const playAgain = document.getElementById('playAgain');
 		const share = document.getElementById('share');
 		playAgain.addEventListener('click', () => {

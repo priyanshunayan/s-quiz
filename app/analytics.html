@@ -13,6 +13,8 @@
     <meta name="description" content="User Details and Data">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous">
     <script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
@@ -27,13 +29,22 @@
         <!-- <img src="images/logo.png"> -->
         <h1 class="heading">SQUIZ</h1>
     </header>
-
-
+    <h3 class="analytics">Analytics</h3>
+    <div class="center-loader" id="loader-rotate">
+            <span class="loading-anim"></span>
+        </div>
+    <div id="chartContainer" style="height: 300px; width: 90%; margin: auto;"></div>
+    <h3 class="missedWords">Words you missed</h3>
+    <div class="center-loader" id="loader-rotate-2">
+            <span class="loading-anim"></span>
+        </div>
     <div id="data">
-
     </div>
+    <div class="center">
+            <button type="button" class="btn btn-light mb-2 mt-3" id="playAgainBtn">Play Again</button>
+            <button type="button" class="btn btn-light mb-2" id="logOut" >Log out</button>
+        </div>
 
-    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
     <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 
