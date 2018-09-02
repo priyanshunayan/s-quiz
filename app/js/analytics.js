@@ -84,6 +84,10 @@ function displayWords() {
     })
 }
 const logout = document.getElementById("logOut");
+const  play= document.getElementById("playAgainBtn");
+play.addEventListener("click", () => {
+    window.location.replace('quiz.html');
+})
 logout.addEventListener("click", () => {
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
