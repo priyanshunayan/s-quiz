@@ -19,7 +19,9 @@ function readData() {
                 console.log("inside got data");
                 const scores = data.val();
                 scoreScored = Object.values(scores.score);
-                words = Object.keys(scores.word);
+                if(scores.word) {
+                    words = Object.keys(scores.word);
+                }
                 for (i = words.length-1; i >=0; i--) {
                     let wordObject = scores.word[words[i]];
                     wordObjects.push(wordObject);
