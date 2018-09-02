@@ -5,7 +5,7 @@ let haveMeaningsLoaded = false;
 const getWords = (wordsArray) => {
 	const promise = new Promise((resolve, reject) => {
 		const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
-		const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=proper-noun%2C%20proper-noun-plural%2C%20proper-noun-posessive%2C%20family-name&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key=" +
+		const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=proper-noun%2C%20proper-noun-plural%2C%20noun-plural%2C%20family-name%2C%20noun&minCorpusCount=1000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key=" +
 			key;
 
 		fetch(wordURL)
