@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Welcome to SQuiz-The Fun Game.</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,41 +8,54 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<script src="https://www.gstatic.com/firebasejs/5.4.0/firebase.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+	    crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/loading-bar.css" />
+	<link href="https://fonts.googleapis.com/css?family=Cookie" rel="stylesheet">
+	<script src="js/firebase.js"></script>
+	<script src="js/login.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/loading-bar.min.js"></script>
 </head>
+
 <body>
-<header>
-	<!-- <img src="images/logo.png"> -->
-	<h1 class="heading">SQUIZ</h1>
-</header>
-<div class="float-right">
-<article class="question-status" id="question-status">
-	<span class="question-done" id="count">1</span>/<span class="question-total">5</span>
-</article>
-</div>
-<div class="clearfix"></div>
-<div class="center-loader">
-	<span class="loading-anim"></span>
-</div>
-<div id="x">
-<article class="question-container">
-	<h3 class="question" id="question"></h3>
-	<p class="option1 option" id="option1"></p>
-	<p class="or" id="or">OR</p>
-	<p class="option2 option" id="option2"></p>
-</article>
-</div>
-<article id="results">
-	<p id="score"></p>
-	<h2 id="revisit"></h2>
-	<p id="words"></p>
-</article>
-	<div class="center">
-	<button type="button" class="btn btn-light mb-2" id="playAgain">Play Again</button>
-	<button type="button" class="btn btn-light mb-2 ml-2" id = "share"><a id ="whatsAppLink">Share on WhatsApp </a></button>
+	<header>
+		<!-- <img src="images/logo.png"> -->
+		<h1 class="heading">SQUIZ</h1>
+	</header>
+	<div class="float-right">
+		<article class="question-status" id="question-status">
+			<span class="question-done" id="count">1</span>/<span class="question-total">5</span>
+		</article>
 	</div>
-<script src="js/firebase.js"></script>
-<script src="js/login.js"></script>
+	<div class="clearfix"></div>
+	<div class="center-loader">
+		<span class="loading-anim"></span>
+	</div>
+	<div id="x">
+		<article class="question-container">
+			<h3 class="question" id="question"></h3>
+			<p class="option1 option" id="option1"></p>
+			<!-- <p class="or" id="or">OR</p> -->
+			<p class="option2 option" id="option2"></p>
+		</article>
+	</div>
+	<article id="results">
+		<div id="myItem1" class="ldBar label-center" style="width:125px;height:125px;margin: 1em auto" data-type="stroke"
+		    data-stroke-width="5" data-stroke-trail="#dee1e3" data-stroke=" #1c7ed6" data-stroke-trail-width="5" data-preset="circle">
+		</div>
+		<p id="score"></p>
+		<h2 id="revisit"></h2>
+		<p id="words"></p>
+	</article>
+	<div class="center">
+			<button type="button" class="btn btn-light mb-4" id="stats"><a href="analytics.html"><p>Stats</p> </a></button>
+		</div>
+	
+	<div class="center">
+		<button type="button" class="btn btn-light mb-2" id="playAgain">Play Again</button>
+		<button type="button" class="btn btn-light mb-2 ml-2" id="share"><a id="whatsAppLink">Share on WhatsApp </a></button>
+	</div>
+
 </body>
+
 </html>

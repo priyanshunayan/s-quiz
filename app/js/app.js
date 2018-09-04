@@ -5,7 +5,7 @@ let haveMeaningsLoaded = false;
 const getWords = (wordsArray) => {
 	const promise = new Promise((resolve, reject) => {
 		const key = "f56da904961d843d0300007813f06a10f056eadd8f42c78c8";
-		const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=proper-noun%2C%20proper-noun-plural%2C%20proper-noun-posessive%2C%20family-name&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key=" +
+		const wordURL = "https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=proper-noun%2C%20proper-noun-plural%2C%20noun-plural%2C%20family-name%2C%20noun&minCorpusCount=1000&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=-1&limit=10&api_key=" +
 			key;
 
 		fetch(wordURL)
@@ -68,6 +68,7 @@ function showLoader() {
 		questionStatus.style.display = "none";
 		document.getElementById('share').style.display = "none";
 		document.getElementById('playAgain').style.display = "none";
+		document.getElementById('stats').style.display = "none";
 	})
 }
 
@@ -81,6 +82,7 @@ function hideLoader() {
 	questionStatus.style.display = "table-cell";
 	document.getElementById('share').style.display = "none";
 	document.getElementById('playAgain').style.display = "none";
+	document.getElementById('stats').style.display = "none";
 	console.log("yaya");
 
 }
@@ -144,12 +146,16 @@ const showQuestions = (wordsArray, meaningsArray) => {
 		displayResults();
 	})
 }
-let score = 0;
 
+let score = 0;
+let rightlyAnsweredArray = [];
 const calcScores = (option, answers) => {
+
 	if (answers.includes(option.textContent)) {
+		console.log('options =====>', option.textContent);
+		console.log("Index of Options", answers.indexOf(option.textContent));
+		rightlyAnsweredArray.push(answers.indexOf(option.textContent));
 		score++;
-		console.log("score ===>", score);
 	}
 	console.log("Hi");
 }
@@ -164,33 +170,79 @@ const displayResults = () => {
 		const data = JSON.parse(localStorage.getItem("firebaseui::rememberedAccounts"));
 		const name = data[0].displayName;
 		let greetings = {
-			1: "You need to work hard!",
-			2: " that can be improved",
-			3: "Its Good",
-			4: "Its Great",
-			5: "This can't get any better"
+			0: ["Oops. How about playing it again?", "Practice is the word", "You know you are better than this", "It happens"],
+			1: ["You need to work hard!", "A liitle practice and you are good to go", "Improve your memory by doing unforgettable things.", "Everything always ends well. If not – it's probably not the end."],
+			2: [" that can be improved", "If you're going through Hell, keep going.", "The road to success is always under construction.", "Anyone who has never made a mistake has never tried anything new."],
+			3: ["Its Good", "The possibilities are endless, but I just want the good ones.", "Keep Learning, Keep moving", "Maintain your learining spirit"],
+			4: ["Its Great", "There is no dance without the dancers", "Almost close to perfection", "You are certainly good at this :)"],
+			5: ["This can't get any better", "Perfect", "Brilliant", "Bestest :)"]
 		}
 
-		document.getElementById('score').innerHTML = "Hey " + name + "!" +  "<br>" +" you scored " +  "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "and " + "<b>" +  greetings[score] + "</b>";
+		document.getElementById('score').innerHTML = "Hey " + name + "!" + "<br>" + " you scored " + "<b>" + score * 50 + "/250" + "</b>" + "<br>" + "<p>" + greetings[score][Math.floor(Math.random() * 3 + 1)] + "</p>";
+
+		document.getElementById("myItem1").style.display = "block";
+		var bar1 = new ldBar("#myItem1");
+		var bar2 = document.getElementById('myItem1').ldBar;
+		let set = score / 5 * 100;
+		bar1.set(set);
 		document.getElementById('revisit').innerHTML = "Revisit Words";
 		let loopCount = 0;
+		const WronglyAnsweredWords = [];
 		for (var key in wordMeaning) {
 			if (wordMeaning.hasOwnProperty(key)) {
 				loopCount++;
 				if (loopCount < 6) {
-					document.getElementById('words').innerHTML += "<b>" + key + "</b>" + " : " + wordMeaning[key] + "<br>" + "<br>";
+					if (rightlyAnsweredArray.includes(loopCount - 1)) {
+						document.getElementById('words').innerHTML += "<p style = 'color:#008638; background-color:#e5f9e4; padding:1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
+
+					} else {
+						WronglyAnsweredWords.push({
+							word: key,
+							meaning: wordMeaning[key]
+						})
+						document.getElementById('words').innerHTML += "<p style = 'color:#b8000f; background-color:#f0b7bc; padding: 1em'>" + "<b >" + key + "</b>" + " : " + wordMeaning[key] + "</p>" + "<br>";
+					}
+
 				}
 			}
 		}
+
+		firebase.auth().onAuthStateChanged(function (user) {
+			console.log("user =======>", user);
+
+			if (user) {
+				// User is signed in
+				//writeUserData(user.uid, score);
+				let uid = user.uid;
+				var hashKey = firebase.database().ref().child('users').push().key;
+				let updates = {};
+				updates['/' + user.uid + '/score/' + hashKey] = score;
+				WronglyAnsweredWords.forEach(word => {
+					var hashKey = firebase.database().ref().child('users').push().key;
+					updates['/' + user.uid + '/word/' + hashKey] = {
+						word: word.word,
+						def: word.meaning
+					}
+				});
+
+				return firebase.database().ref().update(updates);
+				/* console.log(user); */
+
+			} else {
+				uid = null;
+				window.location.replace("index.html");
+			}
+		});
 		document.getElementById('share').style.display = "inline";
 		document.getElementById('playAgain').style.display = "inline";
+		document.getElementById('stats').style.display = "inline";
 		const playAgain = document.getElementById('playAgain');
 		const share = document.getElementById('share');
 		playAgain.addEventListener('click', () => {
 			window.location.replace('quiz.html');
 		})
 		share.addEventListener('click', () => {
-			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score*50 + "%20out%20of%20250%20on%20SQUIZ"
+			document.getElementById('whatsAppLink').href = "https://wa.me/?text=I %20have%20scored%20" + score * 50 + "%20out%20of%20250%20on%20https://squiz.netlify.com"
 		})
 	}
 }
@@ -203,19 +255,23 @@ async function main() {
 	console.log(wordsArray);
 	await getMeaning(wordsArray, meaningsArray);
 	console.log(haveMeaningsLoaded);
-	
+
 }
+
 
 main();
 
-(firebase.auth().onAuthStateChanged(function(user) {
+
+//check if this is working or not
+firebase.auth().onAuthStateChanged(function (user) {
 	var uid = null;
 	if (user) {
-	  // User is signed in.
-	  console.log(user);
-	  uid = user.uid;
+		// User is signed in.
+		console.log("user ==========>", user);
+		uid = user.uid;
 	} else {
 		uid = null;
 		window.location.replace("login.html");
 	}
-  })());
+});
+console.log("after the ONAUthState Change");
