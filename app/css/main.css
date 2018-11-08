@@ -386,3 +386,9 @@ article#results p#words {
 	   font-size: 1.3em;
    }
 
+@media only screen and (min-width:900px){
+	body{
+		width:50%;
+		margin: 0 auto!important;
+	}
+}
